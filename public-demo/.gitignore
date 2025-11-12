@@ -1,0 +1,35 @@
+# 演示仓库的屏蔽规则（仅限 public-demo）
+
+# 源代码与脚本（后端不公开）
+*.py
+*.ipynb
+__pycache__/
+
+# 模型与权重（不公开）
+*.pkl
+*.joblib
+*.pt
+*.onnx
+*.h5
+
+# 数据库与数据（不公开）
+*.db
+*.sqlite
+*.sql
+*.csv
+*.parquet
+
+# 配置与密钥（不公开）
+.env
+*.env
+secrets*/
+
+# 私有目录（如存在，不提交）
+rf_model_per90/
+routers/
+space/
+database/
+
+# 其他不必要文件
+.DS_Store
+node_modules/
