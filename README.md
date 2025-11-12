@@ -55,3 +55,6 @@ Athlemetrics welcomes community members to participate in frontend demo enhancem
 ## Disclaimer
 
 To protect intellectual property and data privacy, Athlemetrics does not disclose any backend source code, model weights, or original database files. This directory serves solely as a public demo and explanatory resource and does not provide reusable backend implementations, models, or data. Please refer to the official Athlemetrics platform online version for actual services. Thank you for your understanding and support.
+
+Learn more about our full ecosystem at [Athlemetrics.com](https://athlemetrics.com),  
+where we introduce the project vision, research roadmap, and platform updates.
