@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Athlemetrics Football Analytics Platform | Player Rating, Similarity & Tactical Models</title>
+
+  <!-- Basic SEO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="Athlemetrics is a football analytics platform that turns raw match data into player ratings, similarity search, and tactical insights for fans, analysts, scouts, and coaching staff." />
+  <link rel="canonical" href="https://athlemetrics.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Athlemetrics · Football Analytics Platform" />
+  <meta property="og:description"
+        content="AI-powered player rating, role similarity, and tactical insight tools built for modern football analysis." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://athlemetrics.com/" />
+  <!-- 如果以后有预览图，可以换成自己主站的图 -->
+  <meta property="og:image" content="https://athlemetrics.com/wp-content/uploads/gallery/workflow.svg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Athlemetrics · Football Analytics Platform" />
+  <meta name="twitter:description"
+        content="Turn complex football data into clear, actionable insights with Athlemetrics’ AI-powered models." />
+
+  <!-- Schema.org Organization / WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Athlemetrics",
+    "url": "https://athlemetrics.com/",
+    "description": "A football analytics platform offering AI-powered player rating, similarity search, and tactical insights.",
+    "sameAs": [
+      "https://platform.athlemetrics.com/",
+      "https://api.athlemetrics.com/redoc",
+      "https://athlemetrics.com/blog/"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --ath-bg: #050816;
+      --ath-bg-alt: #0b1220;
+      --ath-card: #101827;
+      --ath-border: rgba(148, 163, 184, 0.25);
+      --ath-primary: #1f6fff;
+      --ath-primary-soft: rgba(31, 111, 255, 0.12);
+      --ath-accent: #19c37d;
+      --ath-text: #e5e7eb;
+      --ath-muted: #9ca3af;
+      --ath-radius-xl: 18px;
+      --ath-radius-full: 999px;
+      --ath-shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+      --ath-font: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                  "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--ath-font);
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 40%, #000 100%);
+      color: var(--ath-text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(2, 6, 23, 0.95), rgba(15, 23, 42, 0.9));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .nav__logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 0, #38bdf8 0, #1d4ed8 40%, #0f172a 75%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.7);
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .nav__link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--ath-muted);
+      border: 1px solid transparent;
+    }
+
+    .nav__link:hover {
+      border-color: rgba(148, 163, 184, 0.4);
+      color: var(--ath-text);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav__link--primary {
+      border-radius: var(--ath-radius-full);
+      padding: 7px 14px;
+      border: 1px solid rgba(96, 165, 250, 0.7);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.35), rgba(30, 64, 175, 0.9));
+      color: #eff6ff;
+      font-weight: 500;
+      box-shadow: 0 10px 35px rgba(30, 64, 175, 0.8);
+    }
+
+    .nav__link--primary:hover {
+      transform: translateY(-1px);
+    }
+
+    main {
+      flex: 1;
+      padding: 32px 18px 40px;
+    }
+
+    .shell {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero__eyebrow {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ath-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero__pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      background: rgba(15, 23, 42, 0.75);
+      font-size: 11px;
+      color: #e0f2fe;
+    }
+
+    .hero__title {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+    }
+
+    .hero__highlight {
+      background: linear-gradient(120deg, #38bdf8, #4f46e5, #22c55e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero__subtitle {
+      font-size: 14px;
+      color: var(--ath-muted);
+      max-width: 480px;
+      margin-bottom: 18px;
+    }
+
+    .hero__grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .hero__chip {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--ath-text);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      font-size: 13px;
+      border-radius: var(--ath-radius-full);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn--primary {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb, #22c55e);
+      border-color: rgba(59, 130, 246, 0.8);
+      color: #f9fafb;
+      box-shadow: var(--ath-shadow-soft);
+      font-weight: 500;
+    }
+
+    .btn--primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn--ghost {
+      border-color: rgba(148, 163, 184, 0.6);
+      color: var(--ath-text);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .btn--ghost:hover {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .btn__tagline {
+      font-size: 11px;
+      color: var(--ath-muted);
+    }
+
+    .hero__card {
+      border-radius: 22px;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), transparent 55%),
+                  radial-gradient(circle at 100% 100%, rgba(52, 211, 153, 0.18), transparent 55%),
+                  var(--ath-card);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 18px 18px 16px;
+      box-shadow: var(--ath-shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__badge {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--ath-muted);
+    }
+
+    .hero__metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .hero__metric {
+      border-radius: 14px;
+      padding: 9px 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .hero__metric-label {
+      font-size: 11px;
+      color: var(--ath-muted);
+      margin-bottom: 2px;
+    }
+
+    .hero__metric-value {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .hero__metric-note {
+      font-size: 11px;
+      color: var(--ath-muted);
+      margin-top: 1px;
+    }
+
+    .hero__footer {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--ath-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .hero__tag {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section__heading {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .section__lead {
+      font-size: 13px;
+      color: var(--ath-muted);
+      max-width: 620px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--ath-radius-xl);
+      border: 1px solid var(--ath-border);
+      padding: 12px 13px;
+    }
+
+    .card--soft {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
+    }
+
+    .card__eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ath-muted);
+      margin-bottom: 4px;
+    }
+
+    .card__title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card__desc {
+      font-size: 12px;
+      color: var(--ath-muted);
+      margin-bottom: 8px;
+    }
+
+    .card__link {
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #bfdbfe;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--ath-muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      padding: 16px 18px 22px;
+      background: radial-gradient(circle at top, #020617 0, #000 70%);
+      color: var(--ath-muted);
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-link {
+      color: var(--ath-muted);
+    }
+
+    .footer-link:hover {
+      color: var(--ath-text);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav__brand" href="https://athlemetrics.com/" target="_blank" rel="noopener">
+        <span class="nav__logo">⚽</span>
+        <span>Athlemetrics</span>
+      </a>
+      <div class="nav__links">
+        <a class="nav__link" href="#models">Models</a>
+        <a class="nav__link" href="#audience">Who it's for</a>
+        <a class="nav__link" href="https://athlemetrics.com/blog/" target="_blank" rel="noopener">Blog</a>
+        <a class="nav__link nav__link--primary"
+           href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">
+          Open Platform
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="shell">
+
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="hero__eyebrow">
+            <span>Football Analytics Platform</span>
+            <span class="hero__pill">Data · Models · API</span>
+          </div>
+          <h1 id="hero-title" class="hero__title">
+            Turning raw match data into
+            <span class="hero__highlight">actionable football intelligence.</span>
+          </h1>
+          <p class="hero__subtitle">
+            Athlemetrics combines player rating, similarity search, and tactical modelling to help fans,
+            analysts, scouts, and coaching staff understand players in a clear, data-driven way.
+          </p>
+
+          <div class="hero__grid" aria-label="Key capabilities">
+            <span class="hero__chip">Per-90 player evaluation</span>
+            <span class="hero__chip">Role & similarity profiling</span>
+            <span class="hero__chip">Tactical & performance maps</span>
+            <span class="hero__chip">API-first, developer friendly</span>
+          </div>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">
+              Launch Athlemetrics Platform
+            </a>
+            <a class="btn btn--ghost" href="https://athlemetrics.com/" target="_blank" rel="noopener">
+              Visit main site
+            </a>
+            <span class="btn__tagline">Hosted demos · Early research previews</span>
+          </div>
+        </div>
+
+        <!-- Right-side “Notion-style” card -->
+        <aside class="hero__card" aria-label="Model overview">
+          <div class="hero__badge">Research demo · In active development</div>
+          <h2 style="font-size:13px;margin:0 0 4px;">Current model suite</h2>
+          <p style="font-size:12px;color:var(--ath-muted);margin:0 0 6px;">
+            Early-stage models spanning the Big 5 European leagues, built on per-90 data and position-aware features.
+          </p>
+
+          <div class="hero__metric-grid">
+            <div class="hero__metric">
+              <div class="hero__metric-label">Player Rating</div>
+              <div class="hero__metric-value">Multi-role MLP + critic layer</div>
+              <div class="hero__metric-note">Attacker · Midfielder · Defender · Goalkeeper</div>
+            </div>
+            <div class="hero__metric">
+              <div class="hero__metric-label">Similarity & Profiling</div>
+              <div class="hero__metric-value">Clustering + embedding space</div>
+              <div class="hero__metric-note">Compare roles, styles & usage</div>
+            </div>
+            <div class="hero__metric">
+              <div class="hero__metric-label">Tactical View</div>
+              <div class="hero__metric-value">Role-based tactical lenses</div>
+              <div class="hero__metric-note">Understand contribution in team context</div>
+            </div>
+            <div class="hero__metric">
+              <div class="hero__metric-label">Delivery</div>
+              <div class="hero__metric-value">Dashboards + API</div>
+              <div class="hero__metric-note">For analysts, scouts & engineers</div>
+            </div>
+          </div>
+
+          <div class="hero__footer">
+            <span>Built as an independent research project.</span>
+            <span class="hero__tag">Not investment advice</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Models & tools -->
+      <section id="models" class="section" aria-labelledby="models-heading">
+        <h2 id="models-heading" class="section__heading">Models & tools</h2>
+        <p class="section__lead">
+          Athlemetrics is organised around three core research tracks: player rating, role & similarity profiling,
+          and tactical insight. Each track is grounded in per-90 statistics and position-specific feature sets.
+        </p>
+
+        <div class="grid">
+          <article class="card card--soft">
+            <div class="card__eyebrow">Model track</div>
+            <h3 class="card__title">Player Rating Demo</h3>
+            <p class="card__desc">
+              Multi-layer rating models for attackers, midfielders, defenders, and goalkeepers using per-90 metrics,
+              logistic scaling, and a critic layer to adjust scores for role context.
+            </p>
+            <a class="card__link" href="https://athlemetrics.com/blog/" target="_blank" rel="noopener">
+              Read technical notes in the blog →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Model track</div>
+            <h3 class="card__title">Player Similarity & Profiling</h3>
+            <p class="card__desc">
+              Role-aware embeddings and clustering (e.g. forwards, midfielders, defenders, goalkeepers)
+              to search for players with similar playing styles, usage patterns, and tactical roles.
+            </p>
+            <a class="card__link" href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">
+              Explore similarity demos on the platform →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Model track</div>
+            <h3 class="card__title">Tactical & Performance Insight</h3>
+            <p class="card__desc">
+              Combining player metrics with role definitions and team context to frame attacking, creative,
+              and defensive contribution in language that coaches and analysts can use.
+            </p>
+            <a class="card__link" href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">
+              View tactical-oriented dashboards →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Delivery</div>
+            <h3 class="card__title">Interactive Dashboards</h3>
+            <p class="card__desc">
+              Web-based dashboards for exploring players, roles, and model outputs without touching code.
+              Designed for fast filtering and side-by-side comparison.
+            </p>
+            <a class="card__link" href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">
+              Open Athlemetrics dashboards →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Delivery</div>
+            <h3 class="card__title">API for Engineers</h3>
+            <p class="card__desc">
+              FastAPI-based services exposing player ratings, similarity queries, and other experimental models
+              for integration into internal tools, scripts, or downstream products.
+            </p>
+            <a class="card__link" href="https://api.athlemetrics.com/redoc" target="_blank" rel="noopener">
+              View API schema & endpoints →
+            </a>
+          </article>
+
+          <article class="card">
+            <div class="card__eyebrow">Roadmap</div>
+            <h3 class="card__title">Future Research</h3>
+            <p class="card__desc">
+              Ongoing work includes deeper tactical modelling, incorporating tracking data where available,
+              and expanding coverage beyond the Big 5 leagues while keeping the system transparent.
+            </p>
+            <div class="pill-row">
+              <span class="pill">Tracking & movement data</span>
+              <span class="pill">More leagues & competitions</span>
+              <span class="pill">Better explainability</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Who it's for -->
+      <section id="audience" class="section" aria-labelledby="audience-heading">
+        <h2 id="audience-heading" class="section__heading">Who Athlemetrics is for</h2>
+        <p class="section__lead">
+          The platform is built for anyone who needs a clear, data-driven view of player contribution —
+          from curious fans to analysts and engineering teams building their own tools.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <h3 class="card__title">Analysts & Data Teams</h3>
+            <p class="card__desc">
+              Use model outputs and similarity search to support scouting, recruitment shortlists,
+              or internal reports in a consistent, reproducible way.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Scouts & Sporting Directors</h3>
+            <p class="card__desc">
+              Quickly understand how a player’s style and profile compare to existing squad members or
+              archetypal roles before deeper video work.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Coaches & Performance Staff</h3>
+            <p class="card__desc">
+              Translate complex metrics into intuitive concepts like “chance creation”, “ball progression”,
+              or “defensive disruption” to inform tactical decisions.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Fans & Creators</h3>
+            <p class="card__desc">
+              Explore data-backed views of your favourite players and teams, and use visualisations in your own
+              analysis threads, blogs, or videos.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Engineers & Builders</h3>
+            <p class="card__desc">
+              Integrate Athlemetrics APIs into your own dashboards, bots, or tools, or contribute new
+              ideas and experiments through the codebase.
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Researchers</h3>
+            <p class="card__desc">
+              Treat Athlemetrics as a living lab for football data science — test new models, compare approaches,
+              or build on top of existing pipelines.
+            </p>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Athlemetrics. Independent football analytics project.</div>
+      <div class="footer-links">
+        <a class="footer-link" href="https://athlemetrics.com/" target="_blank" rel="noopener">Main site</a>
+        <a class="footer-link" href="https://athlemetrics.com/blog/" target="_blank" rel="noopener">Blog</a>
+        <a class="footer-link" href="https://platform.athlemetrics.com/" target="_blank" rel="noopener">Platform</a>
+        <a class="footer-link" href="https://api.athlemetrics.com/redoc" target="_blank" rel="noopener">API docs</a>
+      </div>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</div>
+</body>
+</html>
