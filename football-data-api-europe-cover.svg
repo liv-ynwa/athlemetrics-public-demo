@@ -1,0 +1,29 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Football data API Europe cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#05151f"/>
+      <stop offset="100%" stop-color="#154862"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="74" y="72" width="1052" height="486" rx="26" fill="#0f2837" stroke="#79d4ff" stroke-width="2" opacity="0.95"/>
+  <g opacity="0.22" fill="#80d6ff">
+    <rect x="150" y="420" width="70" height="90"/>
+    <rect x="242" y="360" width="70" height="150"/>
+    <rect x="334" y="310" width="70" height="200"/>
+    <rect x="426" y="270" width="70" height="240"/>
+    <rect x="518" y="240" width="70" height="270"/>
+  </g>
+  <g stroke="#8fe0ff" stroke-width="3" fill="none" opacity="0.52">
+    <path d="M640 430 L720 380 L800 400 L880 320 L960 290 L1040 220"/>
+    <circle cx="640" cy="430" r="5" fill="#8fe0ff"/>
+    <circle cx="720" cy="380" r="5" fill="#8fe0ff"/>
+    <circle cx="800" cy="400" r="5" fill="#8fe0ff"/>
+    <circle cx="880" cy="320" r="5" fill="#8fe0ff"/>
+    <circle cx="960" cy="290" r="5" fill="#8fe0ff"/>
+    <circle cx="1040" cy="220" r="5" fill="#8fe0ff"/>
+  </g>
+  <text x="132" y="220" fill="#e8f7ff" font-family="Georgia, serif" font-size="58" font-weight="700">Top Football Data APIs</text>
+  <text x="132" y="286" fill="#c2ecff" font-family="Verdana, sans-serif" font-size="32">Reliability, latency, and integration in Europe</text>
+  <text x="132" y="514" fill="#8fd9ff" font-family="Verdana, sans-serif" font-size="24">Coverage  |  QA standards  |  Schema stability</text>
+</svg>

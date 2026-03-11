@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1d3a"/>
+      <stop offset="60%" stop-color="#0e5a66"/>
+      <stop offset="100%" stop-color="#39a96b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.22" stroke="#d9fff0" fill="none" stroke-width="2">
+    <path d="M80 510 L220 490 L360 460 L500 440 L640 380 L780 340 L920 300 L1060 250"/>
+    <path d="M80 560 L220 545 L360 530 L500 515 L640 500 L780 480 L920 470 L1060 450"/>
+    <line x1="80" y1="120" x2="80" y2="560"/>
+    <line x1="80" y1="560" x2="1080" y2="560"/>
+  </g>
+  <g fill="#ffffff" font-family="Georgia, serif">
+    <text x="90" y="165" font-size="62" font-weight="700">Comprehensive Guide to Football Data</text>
+    <text x="90" y="228" font-size="30">Build reliable pipelines, metrics, and decisions</text>
+  </g>
+  <rect x="90" y="272" width="420" height="58" rx="10" fill="#ffffff" opacity="0.16"/>
+  <text x="112" y="310" fill="#effff8" font-family="Georgia, serif" font-size="28">from collection to matchday impact</text>
+  <text x="90" y="586" fill="#d7fff2" font-family="Georgia, serif" font-size="26">futrixmetrics.com</text>
+</svg>

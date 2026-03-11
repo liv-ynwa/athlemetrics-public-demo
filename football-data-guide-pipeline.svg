@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+  <rect width="1200" height="560" fill="#f3f8fb"/>
+  <g font-family="Arial, sans-serif" fill="#102a43">
+    <text x="50" y="70" font-size="36" font-weight="700">Football Data Workflow (Example)</text>
+  </g>
+  <g>
+    <rect x="50" y="120" width="210" height="90" rx="12" fill="#dbeafe"/>
+    <text x="72" y="174" font-family="Arial" font-size="24" fill="#0b3b77">1. Ingest APIs</text>
+
+    <rect x="290" y="120" width="210" height="90" rx="12" fill="#cffafe"/>
+    <text x="312" y="174" font-family="Arial" font-size="24" fill="#0b5d68">2. Validate IDs</text>
+
+    <rect x="530" y="120" width="210" height="90" rx="12" fill="#d1fae5"/>
+    <text x="552" y="174" font-family="Arial" font-size="24" fill="#136145">3. Normalize</text>
+
+    <rect x="770" y="120" width="210" height="90" rx="12" fill="#fef3c7"/>
+    <text x="792" y="174" font-family="Arial" font-size="24" fill="#8c4b00">4. Model KPIs</text>
+
+    <rect x="1010" y="120" width="140" height="90" rx="12" fill="#fee2e2"/>
+    <text x="1030" y="174" font-family="Arial" font-size="22" fill="#912018">5. Coach</text>
+
+    <path d="M260 165 L290 165 M500 165 L530 165 M740 165 L770 165 M980 165 L1010 165" stroke="#334e68" stroke-width="4" marker-end="url(#arrow)"/>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 z" fill="#334e68"/>
+    </marker>
+  </defs>
+  <g font-family="Arial" font-size="22" fill="#243b53">
+    <text x="50" y="300">Illustrative ownership split:</text>
+    <rect x="50" y="325" width="720" height="40" rx="8" fill="#e5e7eb"/>
+    <rect x="50" y="325" width="250" height="40" rx="8" fill="#60a5fa"/>
+    <rect x="300" y="325" width="180" height="40" fill="#14b8a6"/>
+    <rect x="480" y="325" width="170" height="40" fill="#34d399"/>
+    <rect x="650" y="325" width="120" height="40" rx="8" fill="#f59e0b"/>
+    <text x="55" y="390">Data Engineering 35%</text>
+    <text x="310" y="390">QA 25%</text>
+    <text x="495" y="390">Analytics 23%</text>
+    <text x="655" y="390">Reporting 17%</text>
+  </g>
+</svg>
